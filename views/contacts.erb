@@ -1,1 +1,9 @@
 <H1> WELCOME TO CONTACTS </H1>
+
+<ul>
+
+	<% Contact.all.each do |contact| %>
+	<li><%= contact.first_name %> <%= contact.last_name %></li>
+	<% end %>
+
+</ul>
