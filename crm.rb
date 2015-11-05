@@ -2,11 +2,23 @@ require 'sinatra'
 require_relative 'contact'
 require 'date'
 
+Contact.create("Johnny", "Bravo", "johnny@bitmakerlabs.com", "Rockstar")
+
 get '/' do
 	@crm_app_name = "My CRM"
 	@today_date = Date.today.to_s
   	erb :index
 end
+
+get "/contacts/:id" do
+  @contact = Contact.find(params[:id].to_i)
+  if @contact 
+    erb :show_contact
+  else
+    raise Sinatra::NotFound
+  end 
+end
+
 
 get '/contacts' do
 	   @crm_app_name = "MY CONTACTS"
