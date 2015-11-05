@@ -4,7 +4,7 @@ class Contact
   	attr_reader :id
 	attr_accessor :first_name, :last_name, :email, :notes
 	@@contacts = []
-  	@@id = 1
+  	@@id = 1000
 
 
   	def self.modify_using_id(id) # .................................................................................+
@@ -141,78 +141,11 @@ class Contact
   		@@contacts
   	end #.............................................................................................................-
 
-  	def self.display_all #...........................................................................................+
-  		Contact.display_datatable_header
-  		@@contacts.each do |the_contact|
-  			print "[%-05s]" % the_contact.id, " "
-	  		print "[%-15s]" % the_contact.first_name , " "
-	  		print "[%-15s]" % the_contact.last_name , " "
-	  		print "[%-30s]" % the_contact.email , " "
-	  		print "[%-50s]" % the_contact.notes
-	  		print "\n"
-		end
-		puts "\n Press Enter to continue"
-  		gets.chomp
-  	end #............................................................................................................-
-
-  	def self.display_all_with_sort(sort_column,order)#...........................................................................................+
-  		
-  		#Help Notes
-  		#a = [["happy", 1], ["sad", 2], ["mad", 1], ["bad", 3], ["glad", 12]]
-		#a.sort {|x,y| y[1] <=> x[1]}
-
-		#binding.pry
-  		case sort_column
-  			when "ID"
-  				#binding.pry
-  				case order
-  				when "A"
-  					array = @@contacts.sort { |x,y|  x.id <=> y.id }
-  				when "D"
-  					array = @@contacts.sort { |x,y|  y.id <=> x.id }
-  				end
-  			when "First_Name"
-  				case order
-  				when "A"
-  					array = @@contacts.sort { |x,y|  x.first_name <=> y.first_name }
-  				when "D"
-  					array = @@contacts.sort { |x,y|  y.first_name <=> x.first_name }
-  				end
-  			when "Last_Name"
-  				case order
-  				when "A"
-  					array = @@contacts.sort { |x,y|  x.last_name <=> y.last_name }
-  				when "D"
-  					array = @@contacts.sort { |x,y|  y.last_name <=> x.last_name }
-  				end
-  			when "Email"
-  				case order
-  				when "A"
-  					array = @@contacts.sort! { |x,y|  x.email <=> y.email }
-  				when "D"
-  					array = @@contacts.sort! { |x,y|  y.email <=> x.email }
-  				end
-		end  
-
-  		Contact.display_datatable_header
-  		array.each do |the_contact|
-  			print "[%-05s]" % the_contact.id, " "
-	  		print "[%-15s]" % the_contact.first_name , " "
-	  		print "[%-15s]" % the_contact.last_name , " "
-	  		print "[%-30s]" % the_contact.email , " "
-	  		print "[%-50s]" % the_contact.notes
-	  		print "\n"
-		end
-		puts "\n Press Enter to continue"
-  		gets.chomp
-
-  		binding.pry
-  	end #............................................................................................................-
 
   	def self.create(first_name, last_name, email, note) #...........................................................+
     	new_contact = Contact.new(first_name, last_name, email, note)
     	@@contacts << new_contact
-    	puts "Id: #{new_contact.id} Contact Added ! #{new_contact} " #Question why does using just @id not work here?
+    	#puts "Id: #{new_contact.id} Contact Added ! #{new_contact} " #Question why does using just @id not work here?
     	return new_contact
   	end # ...........................................................................................................
 
@@ -224,6 +157,13 @@ class Contact
     	@id = @@id
   		@@id += 1
   	end #............................................................................................................-
+
+
+  	def self.find(contact_id)
+    	@@contacts.find { |contact| contact.id == contact_id }
+  	end
+
+
 end
 
 #######################################################################################################################
