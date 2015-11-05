@@ -163,6 +163,9 @@ class Contact
     	@@contacts.find { |contact| contact.id == contact_id }
   	end
 
+  	def remove
+    	@@contacts.delete_if { |contact| contact.id == self.id }
+ 	end
 
 end
 

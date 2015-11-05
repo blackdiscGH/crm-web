@@ -1,11 +1,24 @@
-# At this 
+<!-- At this point we have set the instance variable @contact and caused erb :edit_contact.erb to open
+Because @contact is an instance variable, it is available in this scope 
+
+calling Code: .....
+get "/contacts/:id/edit" do
+  	contact = Contact.find(params[:id].to_i)
+	......etc....
+
+	e.g.  /contacts/1000/edit will call the code below ...
+
+
+--> 
 
 
 <h1> Edit Contact </h1>
 
-<form action ="/contacts/<%= @contact.id %>" method = "post">
-	<input type="hidden" name="_method" value ="put">
-	<input type="text" name="first_name" value="<%= @contact.first_name%>">
+<form action ="/contacts/<%= @contact.id %>" method = "post">  <!-- specifies to call /contacts/1000 after form has been actioned -->
+	<input type="hidden" name="_method" value ="put">  <!-- This is a patch or Put method -->
+
+	<!-- Pre loadding the values -->
+	<input type="text" name="first_name" value="<%= @contact.first_name%>"> 
 	<input type="text" name="last_name" value="<%= @contact.last_name%>">
 	<input type="text" name="email" value="<%= @contact.email%>">
 	<input type="text" name="notes" value="<%= @contact.notes%>">
