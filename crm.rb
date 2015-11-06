@@ -1,6 +1,9 @@
 require 'sinatra'
 require_relative 'contact'
 require 'date'
+require 'data_mapper'
+
+DataMapper.setup(:default, "sqlite3:database.sqlite3")
 
 Contact.create("Johnny", "Bravo", "johnny@bitmakerlabs.com", "Rockstar")
 
